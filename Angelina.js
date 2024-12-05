@@ -86,7 +86,7 @@ function insertText(inputContent, type) {
     DOMSelect.input.innerHTML = "";
   }
   DOMSelect.inputbox.style.display = "none";
-  DOMSelect.settings.style.display = "";
+  DOMSelect.settings.style.display = ""; //sequencing, going through list of steps
 }
 
 function textColor() {
