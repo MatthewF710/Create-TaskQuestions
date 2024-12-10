@@ -64,40 +64,20 @@ function insertText(inputContent, type) {
 Butter:
 
 ```Javascript
-function retrieveFeelingQuote(category) {
-  DOMSelectors.mainOutput.innerHTML = ""; //Gets rid of previous current quote
-  $.ajax({
-    method: "GET",
-    url: "https://api.api-ninjas.com/v1/quotes?category=" + category,
-    headers: { "X-Api-Key": "e83S07p6GaMOgL3Tbp4W7g==SzjBmXqoFLEGxuow" },
-    contentType: "application/json",
-    success: function (result) {
-      console.log("Retrieved Quote:", result); //Check: Quote Retrieval
-      const quoteObject = {
-        author: result[0].author,
-        quote: result[0].quote,
-        category: category,
-      };
-      quoteHistory.push(quoteObject); //Quote added to long term storage (History)
-      console.log("History of Quotes:", quoteHistory); //Check to see if in long term
-      quoteCurrent.length = 0; //Empty quoteCurrent
-      quoteCurrent.push(quoteObject); //Quote added to short term storage (Current Quote)
-      // Display the quote on the page
-      console.log("Current Quote:", quoteCurrent); //Check to see if current quote works
-      for (let i = 0; i < quoteCurrent.length; i++) {
-        const quote = quoteCurrent[i];
-        createQuoteCard(quote);
-      }
-    },
-    error: function ajaxError(jqXHR) {
-      console.error("Error: ", jqXHR.responseText);
-    },
-  });
-}
+const resetHistory = function () {
+  DOMSelectors.mainOutput.innerHTML = ""; // Clear previous quote
+  if (quoteCurrent.length > 0) {
+    for (let i = 0; i < quoteCurrent.length; i++) {
+      const quote = quoteCurrent[i];
+      createQuoteCard(quote);
+    }
+  }
+};
+
 ```
 
-```1. The input of this function is
-
+```
+1. The function has no input but it uses the global array quoteCurrent, filtering through for if the length is greater than 1, and if it is for each one it will create a quote card.
 ```
 
 ---
